@@ -1,0 +1,6 @@
+services:
+  composer:
+    build:
+      context: ./
+    volumes:
+      - ./../../:/app
