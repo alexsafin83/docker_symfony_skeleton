@@ -14,7 +14,7 @@ You must be able to execute .sh scripts
 # How and where to start
 ### Initialization
 There is no initialization routine yet necessary.
-To initialize a project you will use the script `symfony.sh` or `composer.sh`
+To initialize source code, you will use the script `symfony.sh` or `composer.sh`
 ### Using Symfony.sh
 Symfony.sh is a symfony cli running in a docker container.\
 You use it just like the stock symfony cli by calling the script
@@ -37,3 +37,21 @@ $ ./composer.sh init
 ```
 Or just do it manually by adding a composer.json file.
 
+### Start container
+#### In development mode
+```
+$ docker compose -f ./docker/docker-compose.dev.yaml up -d
+```
+These options are active in development mode:
+- xdebug
+- xdebug.mode
+- display_errors
+- log_errors
+- memory_limit
+- and some more (see in docker/php/config/php.dev.ini)
+
+
+#### In production mode
+```
+$ docker compose -f ./docker/docker-compose.yaml up -d
+```
