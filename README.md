@@ -4,7 +4,7 @@ The main goal is to provide a working development environment. This means, all t
 provided here, are not meant to be used in a productive environment (so far).
 
 ## What you will get
-- PHP 8.4.3
+- PHP 8.4.3 with/without xdebug
 - apache web server
 - Symfony framework
 - Symfony-cli
