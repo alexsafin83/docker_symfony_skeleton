@@ -1,4 +1,4 @@
-# docker symfony starter kit
+# 1. docker symfony starter kit
 Starter kit to start a symfony project from scratch, using PHP and symfony framework with ready to use docker set up.\
 The main goal is to provide a working development environment. This means, all the configuration and all the scripts
 provided here, are not meant to be used in a productive environment (so far).
@@ -9,13 +9,14 @@ provided here, are not meant to be used in a productive environment (so far).
 - Symfony framework
 - Symfony-cli
 
-# Requirements
+# 2. Requirements
 Go for it, if you have a working bash or a Linux OS.
 You must be able to execute .sh scripts. Also docker & docker-compose should be installed.
 
-# How and where to start
+# 3. How and where to start
 ### Initialization
-To initialize source code, you will use the script `symfony.sh` or `composer.sh`
+To initialize your project, you will use the script `symfony.sh` or `composer.sh`
+
 ### Using Symfony.sh
 Symfony.sh is a symfony cli running in a docker container.\
 You use it just like the stock symfony cli by calling the script
