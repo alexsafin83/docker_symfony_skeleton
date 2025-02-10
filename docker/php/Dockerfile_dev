@@ -1,0 +1,20 @@
+FROM php:8.4.3-apache-bookworm
+
+# some obligatory packages
+RUN apt update -y && apt install -y procps git
+
+# symfony cli and command 'symfony'
+RUN curl -sS https://get.symfony.com/cli/installer | bash \
+    && echo 'alias symfony="/root/.symfony5/bin/symfony"' >> ~/.bashrc \
+    && echo '#!/bin/sh' >> /bin/symfony \
+    && echo '/root/.symfony5/bin/symfony "$@"' >> /bin/symfony \
+    && chmod u+x /bin/symfony
+
+# xdebug
+RUN pecl channel-update pecl.php.net \
+    && pecl install xdebug-3.4.0 \
+    && docker-php-ext-enable xdebug
+
+# PHP settings for dev mode \
+COPY config/php.dev.ini $PHP_INI_DIR/php.ini
+COPY config/xdebug.ini $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini

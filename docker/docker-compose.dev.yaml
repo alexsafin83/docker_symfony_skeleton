@@ -1,0 +1,10 @@
+services:
+  phpdev:
+    build:
+      context: ./php
+      dockerfile: ./Dockerfile_dev
+    ports:
+      - 4433:443
+      - 8080:80
+    volumes:
+      - ./../:/var/www/html/
