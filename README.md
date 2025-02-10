@@ -26,7 +26,7 @@ $ ./symfony.sh
 
 Therefore, to create a symfony project you will call
 ```
-$ ./symfony.sh project:init
+$ ./symfony.sh local:new
 ```
 
 ### Other ways
