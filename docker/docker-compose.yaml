@@ -5,6 +5,7 @@ services:
       args:
         gitUserName: "$git_user_name"
         gitUserEmail: "$git_user_email"
+        serverName: "www.example.com"
     ports:
       - 4433:443
       - 8080:80

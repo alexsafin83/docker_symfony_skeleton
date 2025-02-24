@@ -1,8 +1,30 @@
 FROM php:8.4.3-apache-bookworm
 
 # some obligatory packages
-RUN apt update -y && apt install -y procps git
+RUN apt update -y && apt install -y procps git vim
 
+# HACK AHEAD: for graceful start of apache2, we need to add missing ENV vars, since source /etc/apache2/envvars doesnt help
+ENV APACHE_LOCK_DIR=/var/lock/apache2 \
+    APACHE_LOG_DIR=/var/log/apache2 \
+    APACHE_PID_FILE=/var/run/apache2/apache2.pid \
+    APACHE_RUN_DIR=/var/run/apache2 \
+    APACHE_RUN_GROUP=www-data \
+    APACHE_RUN_USER=www-data \
+    LANG=C
+
+# fix the FQDN error of apache
+ARG serverName
+RUN echo "ServerName ${serverName}" >> /etc/apache2/apache2.conf
+
+# install mod_rewrite and add some fixes and obligatory settings for apache2
+RUN a2enmod rewrite \
+    && sed -i 's/Options Indexes FollowSymLinks/Options FollowSymLinks/' /etc/apache2/apache2.conf \
+    && echo "AddDefaultCharset UTF-8" >> /etc/apache2/conf-available/charset.conf
+
+# add rewrites for this app
+COPY config/symfony.vhost.conf /etc/apache2/sites-enabled/000-default.conf
+
+# git config
 ARG gitUserEmail
 ARG gitUserName
 

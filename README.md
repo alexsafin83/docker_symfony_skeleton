@@ -48,7 +48,7 @@ $ docker compose -f ./docker/docker-compose.dev.yaml up -d
 OR
 $ docker compose -f ./docker/docker-compose.dev.yaml down
 ```
-These options are active in development mode:
+These options are changed in development mode:
 - xdebug
 - xdebug.mode
 - display_errors
@@ -56,15 +56,21 @@ These options are active in development mode:
 - memory_limit
 - and some more (see in docker/php/config/php.dev.ini)
 
-
-#### In production mode
-```
-$ docker compose -f ./docker/docker-compose.yaml up -d
-OR
-$ docker compose -f ./docker/docker-compose.yaml down
-```
-
 ## 4. Urls
 
 ### Entry url (not final)
-http://localhost:8080/public/index.php
+http://localhost:8080/
+
+## 5. Production mode
+
+### Configuration
+Change value of 'serverName' in `docker/docker-compose.yaml` to your server name
+
+### Start/stop container
+```
+$ docker compose -f ./docker/docker-compose.yaml up -d
+OR
+$ docker compose -f ./docker/docker-compose.yaml up
+OR
+$ docker compose -f ./docker/docker-compose.yaml down
+```
