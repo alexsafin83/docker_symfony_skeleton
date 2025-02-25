@@ -37,3 +37,12 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash \
     && echo '#!/bin/sh' >> /bin/symfony \
     && echo '/root/.symfony5/bin/symfony "$@"' >> /bin/symfony \
     && chmod u+x /bin/symfony
+
+# php settings
+RUN sed -i 's/;zend_extension=opcache/zend_extension=opcache/' /usr/local/etc/php/php.ini-production \
+    && sed -i 's/;opcache.enable=1/opcache.enable=1/' /usr/local/etc/php/php.ini-production \
+    && sed -i 's/;opcache.save_comments=1/opcache.save_comments=1/' /usr/local/etc/php/php.ini-production \
+    && sed -i 's/;opcache.enable_cli=0/opcache.enable_cli=1/' /usr/local/etc/php/php.ini-production \
+    && sed -i 's/;opcache.use_cwd=1/opcache.use_cwd=1/' /usr/local/etc/php/php.ini-production \
+    && sed -i 's/;opcache.memory_consumption=128/opcache.memory_consumption=128/' /usr/local/etc/php/php.ini-production \
+    && mv /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
