@@ -36,3 +36,9 @@ rm -f ./symfonytmp/.gitignore
 mv ./symfonytmp/* ./
 mv ./symfonytmp/.* ./
 rm -rf ./symfonytmp
+
+
+. ./shellStyle
+echo -e "${BoldIntensityGreen}Done!\n"
+echo -e "Have fun using symfony app at"
+echo -e "${tab}http://localhost:8080/ ${Neutral}"

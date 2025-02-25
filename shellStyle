@@ -1,0 +1,7 @@
+Green='\033[0;32m'
+IntensityGreen='\033[0;92m'
+BoldIntensityGreen='\033[1;92m'
+BoldGreen='\033[1;32m'
+Neutral='\033[0m' # reset color
+
+tab='\t'
