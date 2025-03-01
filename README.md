@@ -74,3 +74,22 @@ $ docker compose -f ./docker/docker-compose.yaml up
 OR
 $ docker compose -f ./docker/docker-compose.yaml down
 ```
+
+## 6. FAQ
+
+#### 6.1 What to do, if I want to get new updates from this template project into my repository?
+
+First, add template's repo url: 
+```
+git remote add template git@github.com:alexsafin83/docker_symfony_starter_kit.git
+```
+Then fetch all:
+```
+git fetch --all --no-tags
+```
+And finally merge develop (or respectively master) branch from template into your project
+```
+git merge template/develop --allow-unrelated-histories
+```
+Have fun merging conflicts ;)
+
