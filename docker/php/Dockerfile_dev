@@ -12,10 +12,6 @@ ENV APACHE_LOCK_DIR=/var/lock/apache2 \
     APACHE_RUN_USER=www-data \
     LANG=C
 
-# fix the FQDN error of apache
-ARG serverName
-RUN echo "ServerName ${serverName}" >> /etc/apache2/apache2.conf
-
 # install mod_rewrite and add some fixes and obligatory settings for apache2
 RUN a2enmod rewrite \
     && sed -i 's/Options Indexes FollowSymLinks/Options FollowSymLinks/' /etc/apache2/apache2.conf \
@@ -23,6 +19,10 @@ RUN a2enmod rewrite \
 
 # add rewrites for this app
 COPY config/symfony.vhost.conf /etc/apache2/sites-enabled/000-default.conf
+
+# fix the FQDN error of apache
+ARG serverName
+RUN echo "ServerName ${serverName}" >> /etc/apache2/apache2.conf
 
 # git config
 ARG gitUserEmail
@@ -39,13 +39,13 @@ RUN curl -sS https://get.symfony.com/cli/installer | bash \
     && chmod u+x /bin/symfony
 
 # php settings
-RUN mv /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
+RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 
 # xdebug
 RUN pecl channel-update pecl.php.net \
     && pecl install xdebug-3.4.1 \
     && docker-php-ext-enable xdebug
 
-# PHP settings for dev mode \
+# PHP settings for dev mode
 COPY config/php.dev.ini $PHP_INI_DIR/php.ini
 COPY config/xdebug.ini $PHP_INI_DIR/conf.d/docker-php-ext-xdebug.ini
