@@ -13,9 +13,9 @@ ENV APACHE_LOCK_DIR=/var/lock/apache2 \
     LANG=C
 
 # install mod_rewrite and add some fixes and obligatory settings for apache2
-RUN a2enmod rewrite \
-    && sed -i 's/Options Indexes FollowSymLinks/Options FollowSymLinks/' /etc/apache2/apache2.conf \
-    && echo "AddDefaultCharset UTF-8" >> /etc/apache2/conf-available/charset.conf
+RUN sed -i 's/Options Indexes FollowSymLinks/Options FollowSymLinks/' /etc/apache2/apache2.conf \
+    && echo "AddDefaultCharset UTF-8" >> /etc/apache2/conf-available/charset.conf \
+    && a2enmod rewrite
 
 # add rewrites for this app
 COPY config/symfony.vhost.prod.conf /etc/apache2/sites-enabled/000-default.conf
