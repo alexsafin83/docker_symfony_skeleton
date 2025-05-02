@@ -48,7 +48,7 @@ $ docker compose -f ./docker/docker-compose.dev.yaml up -d
 OR
 $ docker compose -f ./docker/docker-compose.dev.yaml down
 ```
-These options are active in development mode:
+These options are changed in development mode:
 - xdebug
 - xdebug.mode
 - display_errors
@@ -56,15 +56,40 @@ These options are active in development mode:
 - memory_limit
 - and some more (see in docker/php/config/php.dev.ini)
 
+## 4. Urls
 
-#### In production mode
+### Entry url (not final)
+http://localhost:8080/
+
+## 5. Production mode
+
+### Configuration
+Change value of 'serverName' in `docker/docker-compose.yaml` to your server name
+
+### Start/stop container
 ```
 $ docker compose -f ./docker/docker-compose.yaml up -d
+OR
+$ docker compose -f ./docker/docker-compose.yaml up
 OR
 $ docker compose -f ./docker/docker-compose.yaml down
 ```
 
-## 4. Urls
+## 6. FAQ
 
-### Entry url (not final)
-http://localhost:8080/public/index.php
+#### 6.1 What to do, if I want to get new updates from this template project into my repository?
+
+First, add template's repo url: 
+```
+git remote add template git@github.com:alexsafin83/docker_symfony_starter_kit.git
+```
+Then fetch all:
+```
+git fetch --all --no-tags
+```
+And finally merge develop (or respectively master) branch from template into your project
+```
+git merge template/develop --allow-unrelated-histories
+```
+Have fun merging conflicts ;)
+
